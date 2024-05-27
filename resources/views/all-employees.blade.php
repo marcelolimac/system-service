@@ -35,9 +35,9 @@ $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" titl
 
 $config = [
     'data' => [
-        [22, 'John Bender', '1', '00/00/0000', '35', 'Nenhum', 'Nenhum', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-        [19, 'Sophia Clemens', '1', '00/00/0000', '35', 'Nenhum', 'Nenhum', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-        [3, 'Peter Sousa', '1', '00/00/0000', '35', 'Nenhum', 'Nenhum', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
+        [22, 'John Bender', '1', '00/00/0000', '35', 'Nenhum', 'Nenhum', '<nobr>'.$btnEdit.$btnDelete.'</nobr>'],
+        [19, 'Sophia Clemens', '1', '00/00/0000', '35', 'Nenhum', 'Nenhum', '<nobr>'.$btnEdit.$btnDelete.'</nobr>'],
+        [3, 'Peter Sousa', '1', '00/00/0000', '35', 'Nenhum', 'Nenhum', '<nobr>'.$btnEdit.$btnDelete.'</nobr>'],
     ],
     'order' => [[1, 'asc']],
     'columns' => [null, null, null, ['orderable' => false]],

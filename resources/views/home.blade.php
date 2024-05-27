@@ -31,9 +31,9 @@ $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" titl
 
 $config = [
     'data' => [
-        [22, 'John Bender', '+02 (123) 123456789', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-        [19, 'Sophia Clemens', '+99 (987) 987654321', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-        [3, 'Peter Sousa', '+69 (555) 12367345243', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
+        [22, 'John Bender', '+02 (123) 123456789', '<nobr>'.$btnEdit.$btnDelete.'</nobr>'],
+        [19, 'Sophia Clemens', '+99 (987) 987654321', '<nobr>'.$btnEdit.$btnDelete.'</nobr>'],
+        [3, 'Peter Sousa', '+69 (555) 12367345243', '<nobr>'.$btnEdit.$btnDelete.'</nobr>'],
     ],
     'order' => [[1, 'asc']],
     'columns' => [null, null, null, ['orderable' => false]],
@@ -53,60 +53,12 @@ $config = [
 <x-adminlte-modal id="modalMin" title="Minimal"/>
 <x-adminlte-modal id="modalCustom" title="Editar Dados" size="lg" theme="teal"
     icon="fa fa-lg fa-fw fa-pen" v-centered static-backdrop scrollable>
-    <div style="display: flex;" >
-        <x-adminlte-input name="iLabel" label="Matrícula"
-        fgroup-class="col-md-6" disable-feedback/>
+   <div style="display: flex;" >
+        <x-adminlte-input name="iLabel" label="Descrição do Produto"
+        fgroup-class="col-md-6" disable-feedback />
 
-        <x-adminlte-input name="iLabel" label="Nome Funcionário"
-        fgroup-class="col-md-6" disable-feedback/>
-    </div>
-
-    <div style="
-        display: flex; 
-        align-items: center;
-    " >
-        <x-adminlte-input name="iLabel" label="Setor"
-        fgroup-class="col-md-6" disable-feedback/>
-
-        <div style="width: 100%; padding: .5em;">
-            @php
-            $config = [
-                "singleDatePicker" => true,
-                "showDropdowns" => true,
-                "startDate" => "js:moment()",
-                "minYear" => 2000,
-                "maxYear" => "js:parseInt(moment().format('YYYY'),11)",
-                "cancelButtonClasses" => "btn-danger",
-                "locale" => ["format" => "DD-MM-YYYY"],
-            ];
-            @endphp
-            <x-adminlte-date-range name="drSizeSm" label="Data de entrega" :config="$config">
-                <x-slot name="appendSlot">
-                    <div class="input-group-text bg-dark">
-                        <i class="fas fa-calendar-day"></i>
-                    </div>
-                </x-slot>
-            </x-adminlte-date-range>                    
-        </div>
-    </div>
-
-    <div style="
-        display: flex;
-        justify-content: space-around;
-        gap: 20px;
-    ">
-        <div style="width: 100%; padding: .4em;">
-            <x-adminlte-select2 name="sel2Basic" label="Sapato">
-                <option selected>Nenhum</option>
-                <option>34</option>
-                <option>35</option>
-                <option>36</option>
-                <option>37</option>
-                <option>38</option>
-            </x-adminlte-select2>
-        </div>
-        <div style="width: 100%; padding: .4em;">
-            <x-adminlte-select2 name="sel2Basic" label="Calça">
+        <div style="width: 100%;">
+            <x-adminlte-select2 name="sel2Basic" label="Tamanho">
                 <option selected>Nenhum</option>
                 <option>P</option>
                 <option>M</option>
@@ -115,17 +67,10 @@ $config = [
                 <option>XG</option>
             </x-adminlte-select2>
         </div>
-        <div style="width: 100%; padding: .4em;">
-            <x-adminlte-select2 name="sel2Basic" label="Vestido">
-                <option selected>Nenhum</option>
-                <option>P</option>
-                <option>M</option>
-                <option>G</option>
-                <option>GG</option>
-                <option>XG</option>
-            </x-adminlte-select2>
-        </div>
+
     </div>
+    <x-adminlte-input name="iLabel" label="Estoque Atual" type="number"
+    fgroup-class="col-md-6" disable-feedback/>
 
     <x-slot name="footerSlot">
         <x-adminlte-button class="mr-auto" onclick="alert('Editado')" theme="success" label="Salvar"/>
