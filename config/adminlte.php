@@ -337,30 +337,20 @@ return [
         [
             'text' => 'Funcionários',
             'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Todos',
-                    'url' => 'all-employees',
-                ],
-                [
-                    'text' => 'Registrar',
-                    'url' => 'register-employee',
-                ],
-            ],
+            'url' => 'employees',
+
         ],
         [
-            'text' => 'Fardamento',
+            'text' => 'Uniformes',
             'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Adicionar',
-                    'url' => 'add-uniform',
-                ],
-                [
-                    'text' => 'Estoque',
-                    'url' => 'home',
-                ],
-            ],
+            'url' => 'uniforms',
+
+        ],
+        [
+            'text' => 'Retirada',
+            'icon' => 'fas fa-fw fa-share',
+            'url' => 'home',
+
         ],
         // ['header' => 'labels'],
         // [
@@ -547,6 +537,31 @@ return [
                     'type' => 'css',
                     'asset' => true,
                     'location' => 'vendor/daterangepicker/daterangepicker.css',
+                ],
+            ],
+        ],
+        'BsCustomFileInput' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bs-custom-file-input/bs-custom-file-input.min.js',
+                ],
+            ],
+        ],
+        'BootstrapSelect' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
                 ],
             ],
         ],
