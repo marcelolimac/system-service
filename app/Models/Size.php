@@ -9,10 +9,19 @@ class Size extends Model
 {
     use HasUuids;
 
-    protected $fillable = ['uniform_id', 'type', 'amount'];
+    protected $fillable = [
+        'uniform_id', 
+        'type', 
+        'amount'
+    ];
 
     public function uniform()
     {
         return $this->belongsTo(Uniform::class);
+    }
+
+    public function withdraw() 
+    {
+        return $this->hasMany(Withdraw::class);
     }
 }

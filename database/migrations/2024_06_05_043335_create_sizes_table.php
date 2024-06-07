@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('sizes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('uniform_id')->constrained('uniforms')->onDelete('cascade');
             $table->string('type');
             $table->integer('amount');
+            $table->foreignUuid('uniform_id')->constrained('uniforms')->onDelete('cascade');
             $table->timestamps();
         });
     }

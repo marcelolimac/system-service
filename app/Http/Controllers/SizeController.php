@@ -70,6 +70,8 @@ class SizeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $size = Size::findOrFail($id);
+        $size->delete();
+        return redirect("/uniforms");
     }
 }
