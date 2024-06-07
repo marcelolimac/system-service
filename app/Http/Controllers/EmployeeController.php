@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
-use App\Models\Size;
 
-
-
-class SizeController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $employees = Employee::all();
+        return view("employees", ["employees" => $employees]);
     }
 
     /**
@@ -30,14 +29,13 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        $size = new Size;
-        $size->uniform_id = $request->uniformId;
-        $size->type = $request->type;
-        $size->amount = $request->amount;
+        $employee = new Employee;
+        $employee->name = $request->name;
+        $employee->enrollment = $request->enrollment;
+        $employee->sector = $request->sector;
+        $employee->save();
 
-        $size->save();
-
-        return redirect('/uniforms');
+        return redirect('/employees');
     }
 
     /**
@@ -53,7 +51,7 @@ class SizeController extends Controller
      */
     public function edit(string $id)
     {
-        
+        //
     }
 
     /**
@@ -61,8 +59,8 @@ class SizeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Size::findOrFail($id)->update($request->all());
-        return back();
+        Employee::findOrFail($id)->update($request->except(['_token', '_method']));
+        return redirect('/employees');
     }
 
     /**
@@ -70,8 +68,8 @@ class SizeController extends Controller
      */
     public function destroy(string $id)
     {
-        $size = Size::findOrFail($id);
-        $size->delete();
-        return redirect("/uniforms");
+        $withdraw = Employee::findOrFail($id);
+        $withdraw->delete();
+        return redirect('/employees');
     }
 }

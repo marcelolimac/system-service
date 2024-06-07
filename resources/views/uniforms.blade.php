@@ -16,8 +16,8 @@
         <h1 class="m-0 text-dark">Uniformes</h1>
 
         <div>
-            <x-adminlte-button data-toggle="modal" data-target="#modalToAdd" label="Adicionar Produto" theme="primary" />
-            <x-adminlte-button data-toggle="modal" data-target="#modalSizeAmount" label="Adicionar Quantidade" theme="primary" />
+            <x-adminlte-button data-toggle="modal" data-target="#modalToAdd" label="Adicionar uniforme" theme="primary" />
+            <x-adminlte-button data-toggle="modal" data-target="#modalSizeAmount" label="Adicionar tamanho" theme="primary" />
         </div>
     </div>
 @stop
@@ -38,9 +38,9 @@ $config = [
 ];
 
 foreach ($uniforms as $uniform) {
-    $btnDetails = '
-        <a class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details" href="/uniforms/'.$uniform->id.'/edit">
-            <i class="fa fa-lg fa-fw fa-eye"></i>
+    $btnWithdraw = '
+        <a class="btn btn-xs btn-default text-teal mx-1 shadow" title="Retirar" href="/uniforms/'.$uniform->id.'/edit">
+            <i class="fa fa-lg fa-fw fa-share"></i>
         </a>
     ';
     $btnEdit = '
@@ -50,14 +50,14 @@ foreach ($uniforms as $uniform) {
     ';
     $btnDelete = '
         <button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-            <i class="fa fa-lg fa-fw fa-trash"></i>
+            <i class="fa fa-lg fa-fw fa-trash" data-toggle="modal" data-target="#modalDelete-'.$uniform->id.'"></i>
         </button>
     ';
 
     $config['data'][] = [
         $uniform->id,
         $uniform->name,
-        '<nobr>'.$btnDetails.$btnEdit.$btnDelete.'</nobr>',
+        '<nobr>'.$btnWithdraw.$btnEdit.$btnDelete.'</nobr>',
     ];
 }
 @endphp
@@ -71,37 +71,69 @@ foreach ($uniforms as $uniform) {
             @foreach($row as $cell)
                 <td>{!! $cell !!}</td>
             @endforeach
-
-            <x-adminlte-modal 
-                id="modalEdit-{{ $row[0] }}" 
-                title="Adicionar Quantidade" 
-                size="lg" theme="teal"
-                icon="fa fa-lg fa-fw fa-pen" 
-                v-centered static-backdrop scrollable
-            >
-                <form action="/uniforms/{{ $row[0] }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <x-adminlte-input
-                        id="name" 
-                        name="name" 
-                        label="Nome do uniforme"
-                        fgroup-class="w-100"
-                        value="{{ $row[1] }}"
-                    />
-                    
-                    <div style="
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        margin-top: 2em;
-                    ">
-                        <x-adminlte-button type="submit" class="mr-auto" theme="success" label="Adicionar" />
-                        <x-adminlte-button theme="danger" label="Cancelar" data-dismiss="modal" />
-                    </div>
-                </form>
-            </x-adminlte-modal>
         </tr>
+
+        <x-adminlte-modal 
+            id="modalEdit-{{ $row[0] }}" 
+            title="Editar uniforme" 
+            size="lg" theme="teal"
+            icon="fa fa-lg fa-fw fa-pen" 
+            v-centered static-backdrop scrollable
+        >
+            <form action="/uniforms/{{ $row[0] }}" method="POST">
+                @csrf
+                @method('PUT')
+                <x-adminlte-input
+                    id="name" 
+                    name="name" 
+                    label="Nome do uniforme"
+                    fgroup-class="w-100"
+                    value="{{ $row[1] }}"
+                />
+                
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: 2em;
+                ">
+                    <x-adminlte-button type="submit" class="mr-auto" theme="success" label="Adicionar" />
+                    <x-adminlte-button theme="danger" label="Cancelar" data-dismiss="modal" />
+                </div>
+            </form>
+        </x-adminlte-modal>
+
+        {{-- Deletar --}}
+        <x-adminlte-modal 
+            id="modalDelete-{{ $row[0] }}" 
+            title="Deletar" 
+            size="lg"
+            theme="teal"
+            icon="fa fa-lg fa-fw fa-trash" 
+            v-centered static-backdrop scrollable
+        >
+            <form action="/uniforms/{{ $row[0] }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <div style="
+                    display: flex; 
+                    justify-content: center;
+                    align-items: center;
+                ">
+                    <strong>Deseja deletar esse registro?</strong>
+                </div>
+
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: 2em;
+                ">
+                    <x-adminlte-button type="submit" class="mr-auto" theme="success" label="Deletar"/>
+                    <x-adminlte-button theme="danger" label="Cancelar" data-dismiss="modal"/>
+                </div>
+            </form>
+        </x-adminlte-modal>
     @endforeach
 </x-adminlte-datatable>
 
@@ -118,9 +150,9 @@ foreach ($uniforms as $uniform) {
 @endphp
 <x-adminlte-modal 
     id="modalSizeAmount" 
-    title="Adicionar Quantidade" 
+    title="Adicionar tamanho" 
     size="lg" theme="teal"
-    icon="fa fa-lg fa-fw fa-pen" 
+    icon="fa fa-lg fa-fw fa-plus" 
     v-centered static-backdrop scrollable
 >
     <form action="/sizes" method="POST">
@@ -168,10 +200,10 @@ foreach ($uniforms as $uniform) {
 {{-- Modal de Uniforme --}}
 <x-adminlte-modal 
     id="modalToAdd" 
-    title="Adicionar funcionário" 
+    title="Adicionar uniforme" 
     size="lg"
     theme="teal"
-    icon="fa fa-lg fa-fw fa-pen" 
+    icon="fa fa-lg fa-fw fa-plus" 
     with-footer="{{ false }}"
     v-centered static-backdrop scrollable
 >

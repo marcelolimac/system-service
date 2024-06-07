@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\Uniform;
 use App\Models\Size;
@@ -41,13 +42,6 @@ class UniformController extends Controller
         $uniform = new Uniform;
         $uniform->name = $request->name;
         $uniform->save();
-
-        // $size = new Size;
-        // $size->uniform_id = $uniform->id;
-        // $size->type = $request->type;
-        // $size->amount = $request->amount;
-        // $size->save();
-
         return redirect('/uniforms');
     }
 
@@ -58,12 +52,24 @@ class UniformController extends Controller
     public function edit($id)
     {
         $uniform = Uniform::with('sizes')->findOrFail($id);
-        return view('uniform-show', ['uniform'=> $uniform]);
+        $employees = Employee::all();
+
+        return view('uniform-show', [
+            'uniform'=> $uniform,
+            'employees' => $employees,
+        ]);
     }
 
     public function update(Request $request, $id)
     {
         Uniform::findOrFail($id)->update($request->all());
+        return redirect('/uniforms');
+    }
+
+    public function destroy(string $id)
+    {
+        $uniform = Uniform::findOrFail($id);
+        $uniform->delete();
         return redirect('/uniforms');
     }
 }

@@ -15,4 +15,9 @@ class Uniform extends Model
     {
         return $this->hasMany(Size::class);
     }
+
+    public function withdraw()
+    {
+        return $this->hasMany(Withdraw::class);
+    }
 }

@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sizes', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('type');
-            $table->integer('amount');
+        Schema::create('withdraws', function (Blueprint $table) {
+            $table->id();
+            $table->integer('withdrawal_amount');
+            $table->dateTime('exit_date');
+            $table->dateTime('delivery_date');
+            $table->foreignUuid('employee_id')->constrained('employees')->onDelete('cascade');
             $table->foreignUuid('uniform_id')->constrained('uniforms')->onDelete('cascade');
+            $table->foreignUuid('size_id')->constrained('sizes')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sizes');
+        Schema::dropIfExists('withdraw');
     }
 };
